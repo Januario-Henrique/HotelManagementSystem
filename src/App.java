@@ -75,15 +75,48 @@ public class App {
 
                     for (int i = 0; i < n; i++) {
 
-                        System.out.print("Enter first name: ");
-                        String first = sc.nextLine();
+                        String first;
+                        while (true) {
+                            System.out.print("Enter first name: ");
+                            first = sc.nextLine();
 
-                        System.out.print("Enter last name: ");
-                        String last = sc.nextLine();
+                            if (first.matches("^[\\p{L} ]+$")) {
+                                break;
+                            } else {
+                                System.out.println("Invalid name! Only letters allowed.");
+                            }
+                        }
 
-                        System.out.print("Enter age: ");
-                        int age = sc.nextInt();
-                        sc.nextLine();
+                        String last;
+                        while (true) {
+                            System.out.print("Enter last name: ");
+                            last = sc.nextLine();
+
+                            if (last.matches("^[\\p{L} ]+$")) {
+                                break;
+                            } else {
+                                System.out.println("Invalid name! Only letters allowed.");
+                            }
+                        }
+
+                        int age;
+                        while (true) {
+                            System.out.print("Enter age: ");
+                            if (sc.hasNextInt()) {
+                                age = sc.nextInt();
+                                sc.nextLine();
+
+                                if (age > 0 && age <= 120) {
+                                    break;
+                                } else {
+                                    System.out.println("Invalid age! Must be between 1 and 120.");
+                                }
+
+                            } else {
+                                System.out.println("Invalid input! Enter numbers only.");
+                                sc.nextLine();
+                            }
+                        }
 
                         people.add(new Person(first, last, age));
                     }
