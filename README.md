@@ -111,3 +111,5 @@ Through these two projects, the following skills were developed:
 
 # 👨‍💻 Author
 Developed as part of Java learning and practical database integration exercises.
+@Januario Henrique
+https://www.linkedin.com/in/januario-henrique-98335a314/
