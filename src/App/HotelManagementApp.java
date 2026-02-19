@@ -135,8 +135,32 @@ public class HotelManagementApp {
                    }
                    break;
                 case 3:
-                   System.out.println("Option 3 selected");
+                    System.out.println("Option 3 selected");
+                    System.out.print("Enter client id to be delected: ");
+                    id = input.nextInt();
                    
+                   try{
+                       Connection con = DriverManager.getConnection(jdbcUrl, dbUsername, dbPassword);
+                       
+                        String sql= "DELETE FROM client WHERE id =?";
+                   
+                        PreparedStatement ps = con.prepareStatement(sql);
+                        ps.setInt(1,id);
+                        
+                        int rowAffected = ps.executeUpdate();
+                        if(rowAffected >0){
+                            System.out.println("Client delected!");
+                        }else{
+                            System.out.println("Client ID Not found!");
+                        }
+                        
+                        con.close();
+                   
+                   }catch(Exception ex){ 
+                       System.out.println("Error: "+ ex.getMessage());
+                       ex.printStackTrace();
+                   }
+                  
                    break;
                    
                 case 4:
