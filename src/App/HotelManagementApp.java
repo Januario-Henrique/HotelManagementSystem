@@ -143,6 +143,30 @@ public class HotelManagementApp {
                    break;
                 case 5:
                    System.out.println("Option 5 selected");
+                      System.out.print("Enter id client to be find: ");
+                   id=input.nextInt();
+                   try{
+                        Connection con = DriverManager.getConnection(jdbcUrl, dbUsername, dbPassword);
+
+                        String sql= "SELECT * FROM client WHERE id =?;";
+                        PreparedStatement ps = con.prepareStatement(sql);
+
+                        ps.setInt(1, id);
+                        
+                        ResultSet rs = ps.executeQuery();
+                        if(rs.next()){
+                            System.out.println("Client ID found!");
+                        }else{
+                            System.out.println("Client ID Not found!");
+                        }
+                        
+                        con.close();
+                   }catch(Exception ex){
+                       System.out.print("Error: "+ ex.getMessage());
+                       ex.printStackTrace();
+                   
+                   }
+                   
                    break;
                 case 0:
                    System.out.println("Option 0 selecte");
