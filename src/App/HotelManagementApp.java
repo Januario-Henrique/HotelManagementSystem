@@ -95,6 +95,44 @@ public class HotelManagementApp {
                    break;
                 case 2:
                    System.out.println("Option 2 selected");
+                   System.out.print("Enter client id to update: ");
+                   id= input.nextInt();
+                   System.out.print("Enter new name: ");
+                   name=input.next();
+                   System.out.print("Enter new phone number: ");
+                   phoneNumber= input.next();
+                   System.out.print("Enter new email: ");
+                   email=input.next();
+                   System.out.print("Enter new Age: ");
+                   age= input.nextInt();
+                   
+                   try{
+                       Connection con = DriverManager.getConnection(jdbcUrl,dbUsername, dbPassword);
+                       
+                       Statement st = con.createStatement();
+                       
+                       String sql = "UPDATE client SET NAME=?, phone_number=?, email=?, age=? WHERE id=?";
+                       PreparedStatement ps = con.prepareStatement(sql);
+                       
+                       ps.setString(1, name);
+                       ps.setString(2, phoneNumber);
+                       ps.setString(3, email);
+                       ps.setInt(4, age);
+                       ps.setInt(5, id);
+                       
+                       int rowAffected = ps.executeUpdate();
+                       
+                       if(rowAffected > 0){
+                           System.out.println("Client update successfully");
+                       }else{
+                           System.out.println("Client not found");
+                       }
+                       con.close();
+                   }catch(Exception ex){
+                       System.out.println("Error: "+ ex.getMessage());
+                       ex.printStackTrace();
+                   
+                   }
                    break;
                 case 3:
                    System.out.println("Option 3 selected");
