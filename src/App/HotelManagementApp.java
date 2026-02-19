@@ -136,10 +136,53 @@ public class HotelManagementApp {
                    break;
                 case 3:
                    System.out.println("Option 3 selected");
+                   
                    break;
                    
                 case 4:
                    System.out.println("Option 4 selected");
+                                      try{
+                       Connection con = DriverManager.getConnection(jdbcUrl, dbUsername, dbPassword);
+                       String sql= "SELECT * FROM client";
+                   
+                       PreparedStatement ps = con.prepareStatement(sql);
+                       
+                       ResultSet rs= ps.executeQuery();
+                       
+                       System.out.println("-----------------------------------------------------------------------");
+                       System.out.printf("%-5s %-15s %-15s %-25s %-5s\n", 
+                                "ID", "NAME", "PHONE", "EMAIL", "AGE");
+                       System.out.println("-----------------------------------------------------------------------");
+                       
+                       boolean hasData= false;
+                       
+                       while(rs.next()){
+                           hasData = true;
+                           
+                           
+                           
+                           System.out.printf("%-5d %-15s %-15s %-25s %-5d\n", 
+                                   rs.getInt("id"),
+                                   rs.getString("NAME"),
+                                   rs.getString("phone_number"),
+                                   rs.getString("email"),
+                                   rs.getInt("age")
+                           );
+
+                       }
+                       
+                       if(!hasData){
+                           System.out.println("no client found");
+                       }
+                       System.out.println("-----------------------------------------------------------------------");
+                       con.close();
+                   }catch(Exception ex){
+                       System.out.println("Error: "+ ex.getMessage());
+                       ex.printStackTrace();
+                   
+                   }
+                   
+        
                    break;
                 case 5:
                    System.out.println("Option 5 selected");
